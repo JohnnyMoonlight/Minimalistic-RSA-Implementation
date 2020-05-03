@@ -1,0 +1,44 @@
+<div>
+Choose two prime numbers p and q:
+  <div>
+    <label for="p">p:</label>
+    <input id="p" [formControl]=p type="text">
+    <label for="q">q:</label>
+    <input id="q" [formControl]=q type="text">
+  </div>
+</div>
+<div>
+This gives n and phi:
+  <div>
+    <label for="n">n:</label>
+    <input id="n" disabled="disabled" type="text" value="{{n}}">
+    <label for="phi">phi:</label>
+    <input id="phi" disabled="disabled" type="text" value="{{phi}}">
+  </div>
+</div>
+<div>
+Choose an e relatively prime to phi:
+  <div>
+    <label for="e">e:</label>
+    <input id="e" [formControl]=e type="text" value=""> {{e_msg}}
+  </div>
+</div>
+
+<button (click)="privateKey()">Calculate Private Key</button>
+
+
+<div *ngIf="e_valid">
+  Your public key is ({{n}}, {{e.value}}).
+</div>
+
+<div *ngIf="d">
+  Your private key is ({{d}}).
+</div>
+<button (click)="encrypt()">Encrypt</button>
+<div>
+  <textarea id="cypherText" disabled="disabled">{{this.cypherText}}</textarea>
+</div>
+
+c = m^e mod n
+m = c^d mod n
+d·e mod φ(n) = 1
